@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-
+    
+    private func touchID() {
+        let authenticationContext = LAContext()
+        
+        authenticationContext.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: "Compre",
+            reply: { [unowned self] (success, error) -> Void in
+                if( success ) {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    // Do some code here
+                }
+        })
+    }
 }
 
